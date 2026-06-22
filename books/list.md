@@ -1,6 +1,7 @@
 ----
 layout: page
-title: reading list 
+title: reading list
+permalink: /books/list/
 ----
 
 > (total: 18 books)
