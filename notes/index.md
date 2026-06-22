@@ -2,7 +2,6 @@
 layout: page
 title: notes
 ---
-_
 
 <blockquote>
 <p>(The contents are tagged as <tag>repo</tag> as a link to a repo or <tag>post</tag> as a link to a post) </p>
