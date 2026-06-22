@@ -7,7 +7,7 @@ title: books
 
 ## My book reviews
 
-- [*The Lost Symbol* — Dan Brown]()
+- [*Long Walk to Freedom* — Nelson Mandela]()
 
 
 
