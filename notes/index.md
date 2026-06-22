@@ -1,4 +1,6 @@
-# _
+---
+layout: default
+---
 
 ## Advanced C programming 
 
