@@ -2,6 +2,8 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+favicon: /assets/img/favicon.ico
+
 theme_config:
   appearance: "dark"
   show_description: false
