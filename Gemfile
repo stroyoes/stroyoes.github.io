@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-gem "jekyll"
-gem "jekyll-feed"
-gem "jekyll-seo-tag"
-gem "sass-embedded", "~> 1.69"
