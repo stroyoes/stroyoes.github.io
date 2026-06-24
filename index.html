@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>stroyoes</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <div id="terminal">
+            <div id="output"</div>
+            <div id="input-line">
+                <span class="prompt"> Σ :: <span class="prompt-path">~</span> #&nbsp;</span>
+            <input type="text" id="cmd-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus />
+            </div>
+        </div>
+
+        <!-- All scripts for the commands -->
+        <script src="commands/help.js"></script>
+
+        <!--  All the scripts for the terminal -->
+        <script src="terminal/core.js"></script>
+        <script src="terminal/history.js"></script>
+        <script src="terminal/completion.js"></script>
+        <script src="terminal/dispatch.js"></script>
+        <script src="terminal/input.js"></script>
+        <script>_fire_up_the_prompt();</script> <!-- fire up the terminal ui --> 
+
+    </body>
+</html>
