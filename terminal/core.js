@@ -10,7 +10,7 @@ function append_the_banner() {
     const banner_div = document.createElement('div');
     banner_div.className = 'banner';
     banner_div.innerHTML = `
-        <div class="banner-name">stroyoes:$</div>
+        <div class="banner-name">notstr0y:$</div>
         <div class="banner-hint">( type help to start)</div>
     `;
     output.appendChild(div);
