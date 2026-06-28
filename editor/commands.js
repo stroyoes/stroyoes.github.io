@@ -11,7 +11,7 @@ function ed_handle_line(line) {
 
     // @ed: commands
     if (trimmed.startsWith('@ed:')) {
-        const parts = trimmed.split(':'); // ['@ed', cmd, ...]
+        const parts = trimmed.split(':');
 
         switch (parts[1]) {
 
@@ -21,13 +21,7 @@ function ed_handle_line(line) {
                 break;
 
             case 's':
-                _ed_save();
-                exit_ed();
-                break;
-
-            case 'w':
-                _ed_save();
-                _log_print_info('ed: written.');
+                _ed_save(); // save only, do NOT exit
                 break;
 
             case 'p':
@@ -48,11 +42,11 @@ function ed_handle_line(line) {
         return;
     }
 
-    // regular line — just accumulate
+    // regular line — just accumulate 
     _ed_lines.push(line);
 }
 
-// print buffer 
+// print buffer
 function _ed_print() {
     if (_ed_lines.length === 0) {
         _log_print_info('ed: buffer empty.');
@@ -75,8 +69,7 @@ function _ed_delete_last() {
     _log_print_info(`ed: deleted line ${_ed_lines.length} — "${removed}"`);
 }
 
-// replace: parse 
-// @ed:r:line_idx:word_idx  — _ is wildcard
+// replace: parse
 function _ed_init_replace(parts) {
     if (parts.length < 4) {
         _print_ed_err('ed: usage — @ed:r:line:word  (use _ as wildcard)');
@@ -121,24 +114,21 @@ function _ed_apply_replace(replacement) {
     const { line_idx, word_idx } = _ed_replace;
     let had_errors = false;
 
-    // case 1: entire buffer
     if (line_idx === '_' && word_idx === '_') {
         _ed_lines = [replacement];
         _log_print_info('ed: replaced entire buffer.');
 
-    // case 2: whole line N
     } else if (word_idx === '_') {
         _ed_lines[line_idx] = replacement;
         _log_print_info(`ed: replaced line ${line_idx}.`);
 
-    // case 3: word W on every line
     } else if (line_idx === '_') {
         _ed_lines = _ed_lines.map((line, i) => {
             const words = line.split(' ');
             if (word_idx >= words.length) {
                 _print_ed_err(`ed: line ${i} — word ${word_idx} out of bounds (line has ${words.length} word${words.length !== 1 ? 's' : ''})`);
                 had_errors = true;
-                return line; // leave untouched
+                return line;
             }
             words[word_idx] = replacement;
             return words.join(' ');
@@ -146,7 +136,6 @@ function _ed_apply_replace(replacement) {
         if (!had_errors) _log_print_info(`ed: replaced word ${word_idx} on all lines.`);
         else             _log_print_info('ed: replacement done with errors above.');
 
-    // case 4: word W on line N
     } else {
         const words = _ed_lines[line_idx].split(' ');
         if (word_idx >= words.length) {

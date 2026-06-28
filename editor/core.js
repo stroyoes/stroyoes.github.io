@@ -5,10 +5,13 @@ let _ed_filename = 'untitled';
 let _ed_mode     = 'normal'; // 'normal' | 'ed' | 'ed:replace'
 let _ed_replace  = null;     // pending replace op { line_idx, word_idx }
 
+// in-memory virtual files/ store
+const _virtual_files = {};
+
 function get_mode()  { return _ed_mode; }
 function set_mode(m) { _ed_mode = m; }
 
-// enter / exit 
+// enter / exit
 function enter_ed(filename = 'untitled') {
     _ed_lines    = [];
     _ed_filename = filename;
@@ -41,15 +44,9 @@ function _set_prompt_replace(hint) {
     if (p) p.innerHTML = `ed:r ${hint} ›&nbsp;`;
 }
 
-// save 
+// save to virtual files/
 function _ed_save() {
-    const content = _ed_lines.join('\n');
-    const blob    = new Blob([content], { type: 'text/plain' });
-    const url     = URL.createObjectURL(blob);
-    const a       = document.createElement('a');
-    a.href        = url;
-    a.download    = _ed_filename.endsWith('.txt') ? _ed_filename : _ed_filename + '.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    _log_print_info(`ed: saved as "${a.download}".`);
+    const fname = _ed_filename.endsWith('.txt') ? _ed_filename : _ed_filename + '.txt';
+    _virtual_files[fname] = _ed_lines.join('\n');
+    _log_print_info(`ed: saved to files/${fname}`);
 }
