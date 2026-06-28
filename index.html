@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>notstr0y</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>Σ</text></svg>">
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="terminal">
+            <div id="output"></div>
+            <div id="input-line">
+                <span class="prompt">Σ :: <span class="prompt-path">~</span> #&nbsp;</span>
+                <input type="text" id="cmd-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus />
+            </div>
+        </div>
+
+        <!-- commands -->
+        <script src="commands/help.js"></script>
+        <script src="commands/whoami.js"></script>
+        <script src="commands/now.js"></script>
+        <script src="commands/history.js"></script>
+        <script src="commands/quote.js"></script>
+        <script src="commands/filesystem.js"></script>
+
+        <!-- editor engine -->
+        <script src="editor/core.js"></script>
+        <script src="editor/commands.js"></script>
+
+        <!-- terminal engine -->
+        <script src="terminal/core.js"></script>
+        <script src="terminal/history.js"></script>
+        <script src="terminal/completion.js"></script>
+        <script src="terminal/dispatch.js"></script>
+        <script src="terminal/input.js"></script>
+
+        <script>_fire_up_the_prompt();</script>
+    </body>
+</html>

@@ -1,0 +1,257 @@
+/* ── reset ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── palette ────────────────────────────────────────── */
+:root {
+  --bg:          #0d0d0d;
+  --fg:          #c9c9c9;
+  --prompt-user: #e87c3a;   /* orange — Σ :: ~ # */
+  --accent:      #4ec9b0;   /* teal  — links, highlights */
+  --accent-dim:  #2d7a6e;
+  --cmd-echo:    #7a7a7a;   /* dimmed repeated command line */
+  --muted:       #555;
+  --cursor:      #e87c3a;
+}
+
+/* ── base ───────────────────────────────────────────── */
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* ── terminal container ─────────────────────────────── */
+#terminal {
+  min-height: 100vh;
+  padding: 2rem 2.5rem 6rem;
+  max-width: 860px;
+}
+
+body {
+  cursor: text;
+}
+
+/* ── output area ────────────────────────────────────── */
+#output {
+  margin-bottom: 0.5rem;
+}
+
+/* ── banner ─────────────────────────────────────────── */
+.banner {
+  margin-bottom: 1.8rem;
+}
+
+.banner-name {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--prompt-user);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.banner-hint {
+  margin-top: 0.5rem;
+  color: var(--accent);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ── cmd echo line ───────────────────────────────────── */
+.cmd-echo {
+  color: var(--cmd-echo);
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+  user-select: none;
+}
+
+.cmd-echo .ep {
+  color: var(--prompt-user);
+  font-weight: 700;
+}
+
+/* ── output blocks ──────────────────────────────────── */
+.output-block {
+  margin-bottom: 0.2rem;
+}
+
+/* ── help table ─────────────────────────────────────── */
+.help-table {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.help-table td {
+  padding: 0.1rem 0;
+  vertical-align: top;
+}
+
+.help-table td:first-child {
+  color: var(--accent);
+  min-width: 180px;
+  padding-right: 2rem;
+}
+
+.help-table td:last-child {
+  color: var(--fg);
+}
+
+.help-table .section-gap td {
+  padding-top: 0.7rem;
+}
+
+/* ── prompt + input line ────────────────────────────── */
+#input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+
+.prompt {
+  color: var(--prompt-user);
+  font-weight: 700;
+  white-space: nowrap;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.prompt-path {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+#cmd-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  caret-color: var(--cursor);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── print variants ─────────────────────────────────── */
+.err    { color: #f47174; }
+.ok     { color: #4ec94e; }
+.info   { color: var(--muted); }
+.ed-err { color: #f47174; }
+
+/* ── links ──────────────────────────────────────────── */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+
+/* ── selection ──────────────────────────────────────── */
+::selection {
+  background: var(--accent-dim);
+  color: #fff;
+}
+
+/* ── whoami ─────────────────────────────────────────── */
+.whoami {
+  line-height: 2;
+}
+
+/* shared color utils */
+.accent { color: var(--accent); }
+.fg     { color: var(--fg); }
+.muted  { color: var(--muted); }
+
+/* ── now ─────────────────────────────────────────────── */
+.now-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.2rem;
+}
+
+.now-row {
+  display: flex;
+  gap: 0;
+}
+
+.now-label {
+  color: var(--prompt-user);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.now-value {
+  color: var(--fg);
+}
+
+/* ── history / timeline ──────────────────────────────── */
+.hist-table {
+  border-collapse: collapse;
+  margin-top: 0.3rem;
+}
+
+.hist-idx {
+  color: var(--muted);
+  padding-right: 1.5rem;
+  user-select: none;
+  font-size: 0.85em;
+}
+
+.hist-year {
+  color: var(--prompt-user);
+  padding-right: 2rem;
+  min-width: 60px;
+}
+
+.hist-event {
+  color: var(--fg);
+}
+
+/* ── quote ───────────────────────────────────────────── */
+.quote-block {
+  margin-top: 0.3rem;
+  max-width: 600px;
+  border-left: 2px solid var(--prompt-user);
+  padding-left: 1rem;
+}
+
+.quote-text {
+  color: var(--fg);
+  line-height: 1.8;
+}
+
+.quote-author {
+  color: var(--muted);
+  margin-top: 0.4rem;
+  font-size: 0.88em;
+}
+
+/* ── filesystem / books ──────────────────────────────── */
+.fs-book {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+/* ── ed editor ───────────────────────────────────────── */
+.prompt.ed-mode {
+  color: var(--accent);
+}
