@@ -2,7 +2,7 @@ function cmd_whoami() {
     return `
 <div class="whoami">
   <span class="accent">notstr0y</span><br>
-  Just a guy who loves embedded programming more 😄 
+  Mostly embedded programming. Occasionally retro game dev. Always learning. 😄
 </div>
 `;
 }
