@@ -1,24 +1,27 @@
-// contains DOM refs, boot, print helper funcs 
+// Contains DOM refs, boot, print helper funcs
 
 const output = document.getElementById('output');
-const input = document.getElementById('cmd-input');
+const input  = document.getElementById('cmd-input');
 
-// boot the terminal interface 
-function _fire_up_the_prompt() { append_the_banner(); input.focus(); }
+// boot the terminal interface
+function _fire_up_the_prompt() {
+    _append_the_banner();
+    input.focus();
+}
 
-function append_the_banner() {
+function _append_the_banner() {
     const banner_div = document.createElement('div');
     banner_div.className = 'banner';
     banner_div.innerHTML = `
-        <div class="banner-name">notstr0y:$</div>
-        <div class="banner-hint">( type help to start)</div>
+        <div class="banner-name">stroyoes:$</div>
+        <div class="banner-hint">( type help to start )</div>
     `;
-    output.appendChild(div);
+    output.appendChild(banner_div);
 }
 
 function show_prompt(cmd) {
     const div = document.createElement('div');
-    div.className = 'cmd-prompt';
+    div.className = 'cmd-echo';
     div.innerHTML = `<span class="ep">Σ :: ~ #</span> ${_esc_the_html(cmd)}`;
     output.appendChild(div);
 }
@@ -30,19 +33,20 @@ function print_output(html) {
     output.appendChild(div);
 }
 
-// some logger functions 
-
+// logger functions
 function _log_print_err(msg) {
     print_output(`<span class="err">${_esc_the_html(msg)}</span>`);
 }
+
 function _log_print_yay(msg) {
     print_output(`<span class="ok">${_esc_the_html(msg)}</span>`);
 }
-funciton _log_print_info(msg) {
-    print_output(`<span class="info">${_esc_the_html(msg)}</span>`);
-} 
 
-// typing animation 
+function _log_print_info(msg) {
+    print_output(`<span class="info">${_esc_the_html(msg)}</span>`);
+}
+
+// typing animation — prints text char by char into a new output block
 function timed_typing_animation(text, delay = 18) {
     const div = document.createElement('div');
     div.className = 'output-block';
@@ -54,21 +58,21 @@ function timed_typing_animation(text, delay = 18) {
         if (i < text.length) {
             div.textContent += text[i++];
             _go_loww();
-            setTimeout(_type_next_char, delay); // means run function after a delay time 
+            setTimeout(_type_next_char, delay);
         }
     }
 
     _type_next_char();
 }
 
-// scroll to bottom of page 
+// scroll to bottom of page
 function _go_loww() {
     window.scrollTo(0, document.body.scrollHeight);
 }
 
-// to escape the html code or style when inputting 
+// escape html so user input never renders as markup
 function _esc_the_html(str) {
-    return str 
+    return str
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
